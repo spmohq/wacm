@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Contacts | Siva Prasad Mukherjee</title>
+    <link rel="icon" type="image/x-icon" href="spm.ico" />
+    <style>
+        /* --- General Styles & Resets --- */
+        :root {
+            --primary-color: #007bff;
+            --success-color: #28a745;
+            --download-color: #17a2b8;
+            --download-hover: #117a8b;
+            --light-gray: #f4f7f9;
+            --dark-gray: #343a40;
+            --card-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            --border-radius: 12px;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        /* --- Page Layout & Container --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--dark-gray);
+        }
+
+        header p, .section-title {
+            font-size: 1.1rem;
+            color: #6c757d;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 25px;
+        }
+
+        /* --- Responsive Emoji Grid --- */
+        .emoji-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        /* --- Card Styling --- */
+        .emoji-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 30px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            position: relative; /* Needed for the overlay */
+            overflow: hidden; /* Keeps overlay corners rounded */
+        }
+        
+        .emoji-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        /* NEW: Styles for the clickable emoji cards */
+        .copy-on-click {
+            cursor: pointer;
+        }
+
+        .emoji {
+            font-size: 4.5rem;
+            margin-bottom: 15px;
+            line-height: 1;
+            user-select: none;
+        }
+
+        .emoji-img {
+            height: 90px;
+            width: 90px;
+            margin: 0 auto 15px auto;
+            display: block;
+        }
+
+        .emoji-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0; /* Adjusted margin for better spacing */
+            color: var(--dark-gray);
+        }
+
+        /* --- Button Styling (for "Friends" section) --- */
+        .btn {
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+            box-sizing: border-box;
+            margin-top: 20px; /* Add space between name and button */
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
+        .download-btn {
+            background-color: var(--download-color);
+        }
+        .download-btn:hover {
+            background-color: var(--download-hover);
+        }
+        
+        /* NEW: Styles for the "Copied!" overlay message */
+        .copied-message {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(40, 167, 69, 0.9); /* Success color with transparency */
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: var(--border-radius);
+            opacity: 0; /* Start hidden */
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            pointer-events: none; /* Can't click the overlay */
+        }
+        
+        .emoji-card.copied-feedback .copied-message {
+            opacity: 1; /* Make visible on click */
+            visibility: visible;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>WhatsApp Contacts</h1>
+        </header>
+        
+        <!-- This section for Friends remains unchanged in functionality -->
+
+        <h2 class="section-title">Contacts</h2>
+
+        <div class="emoji-grid">
+            <div class="emoji-card">
+                <div>
+                    <img src="name.jpg" alt="Profile Picture" class="emoji-img">
+                    <h2 class="emoji-name">The Classic</h2>
+                </div>
+                <a href="#" target="_blank" class="btn download-btn">Open</a>
+            </div>
+
+            <div class="emoji-card">
+                <div>
+                    <img src="name.jpg" alt="Profile Picture" class="emoji-img">
+                    <h2 class="emoji-name">Siva Prasad Mukherjee</h2>
+                </div>
+                <a href="https://wa.me/949883787947" target="_blank" class="btn download-btn">Open</a>
+            </div>
+  
+
+
+<!--- End ---!>
+
+        </div>
+    </div>
+
+    <script>
+        // Universal copy-to-clipboard function
+        function copyToClipboard(textToCopy) {
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = textToCopy;
+            tempTextArea.style.position = 'fixed';
+            tempTextArea.style.left = '-9999px';
+            document.body.appendChild(tempTextArea);
+            tempTextArea.focus();
+            tempTextArea.select();
+            let success = false;
+            try {
+                success = document.execCommand('copy');
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+            document.body.removeChild(tempTextArea);
+            return success;
+        }
+
+        // Add a click event listener to every card designated for copying
+        const copyCards = document.querySelectorAll('.copy-on-click');
+        copyCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const emojiToCopy = card.querySelector('.emoji').innerText;
+                
+                if (copyToClipboard(emojiToCopy)) {
+                    // Provide visual feedback by adding a class
+                    card.classList.add('copied-feedback');
+                    
+                    // Remove the feedback after 1.5 seconds
+                    setTimeout(() => {
+                        card.classList.remove('copied-feedback');
+                    }, 1500);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
